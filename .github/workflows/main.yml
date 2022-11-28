@@ -1,4 +1,4 @@
-name: Test project
+name: Deploy project
 on:
   push:
     branches:
@@ -15,5 +15,26 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npm test
+      
+  deploy:
+    runs-on:  ubuntu-latest
+    steps:
+      - name: Get the code from repository
+        uses: actions/checkout@v3
+      - name: Install nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm test
+      
+      
+      - name: Build proejct
+        run: npm run build
+        
+      - name: Deploy
+        run: echo "deploying"
+    
+    
       
         
